@@ -1,0 +1,56 @@
+<h1>Rushing Stats</h1>
+
+<form method="POST">
+    <label>Search by Player Name:</label>
+    <input type="text" name="player" value="{{ .PlayerFilter }}"></input>
+    <label>Sort by:</label>
+    <select id="sort" name="sort">
+        <option value="Default" {{ if .IsDefaultSortSelected }} selected {{end}} >Default</option>
+        <option value="Yards" {{ if .IsYardsSortSelected }} selected {{end}} >Total Rushing Yards</option>
+        <option value="Longest" {{ if .IsLongestSortSelected }} selected {{end}} >Longest Rush</option>
+        <option value="Touchdowns" {{ if .IsTouchdownsSortSelected }} selected {{end}} >Total Rushing Touchdowns</option>
+    </select>
+    <label>Asc/Desc:</label>
+    <input type="radio" name="order" value="asc" {{ if .IsOrderAsc }} checked {{end}} ></input><label>Ascending</label>
+    <input type="radio" name="order" value="desc" {{ if .IsOrderDesc }} checked {{end}} ></input><label>Descending</label>
+    <input type="submit" name="response" value="Search">
+    <input type="submit" name="response" value="Download">
+</form>
+
+<table border="1" width=100% cellpadding=5%>
+    <tr>
+        <th>Player</th>
+        <th>Team</th>
+        <th>Pos</th>
+        <th>Att</th>
+        <th>Att/G</th>
+        <th>Yds</th>
+        <th>Yds/G</th>
+        <th>TD</th>
+        <th>Lng</th>
+        <th>1st</th>
+        <th>1st%</th>
+        <th>20+</th>
+        <th>40+</th>
+        <th>FUM</th>
+    </tr>
+    {{ range .Stats }}
+    <tr>
+        <td>{{.Player}}</td>
+        <td align="center">{{.Team}}</td>
+        <td align="center">{{.Position}}</td>
+        <td align="center">{{.Attempts}}</td>
+        <td align="center">{{.AttemptsPerGameAvg}}</td>
+        <td align="center">{{.Yards}}</td>
+        <td align="center">{{.AvgYardsPerAttempt}}</td>
+        <td align="center">{{.Touchdowns}}</td>
+        <td align="center">{{.Longest}}</td>
+        <td align="center">{{.FirstDown}}</td>
+        <td align="center">{{.PerFirstDown}}</td>
+        <td align="center">{{.Yards20}}</td>
+        <td align="center">{{.Yards40}}</td>
+        <td align="center">{{.Fumbles}}</td>
+    </tr>
+    {{ end }}
+
+</table>
